@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerMovement : MonoBehaviour {
+public class PlayerMovement : MonoBehaviour
+{
 
     public float speed = 2;
     float life = 1500;
     float currentLife = 1500;
-    private float damage = 1.5f;
-    private float heal = 1.5f;
+    private float damage = 5f;
+    private float heal = 5f;
 
     private GameObject Player;
     public GameObject myLight;
@@ -19,13 +20,18 @@ public class PlayerMovement : MonoBehaviour {
     public Image CurrentLightBar;
 
     public ParticleSystem Leafs;
-    
+    public GameObject BotaoIgnite;
     public Joystick joystick;
 
     public static bool abducted;
 
     void Start()
     {
+        if (Funcoes.pcVersion)
+        {
+            GameObject.FindWithTag("BotaoIgnite").SetActive(false);
+            GameObject.FindWithTag("Joystick").SetActive(false);
+        }
         myLight.GetComponent<SpriteRenderer>().enabled = false;
         myLight.GetComponent<CapsuleCollider2D>().enabled = false;
     }
@@ -38,8 +44,8 @@ public class PlayerMovement : MonoBehaviour {
         float ratio = life / currentLife;
 
         CurrentLightBar.fillAmount = ratio;
-        
-        if(isDamaging)
+
+        if (isDamaging)
         {
             life -= damage;
             if (life <= 0)
@@ -50,9 +56,9 @@ public class PlayerMovement : MonoBehaviour {
             }
         }
 
-        if(life < currentLife && !isDamaging)
+        if (life < currentLife && !isDamaging)
         {
-            if(GameManager.PauseMyGame == false)
+            if (GameManager.PauseMyGame == false)
             {
                 life += heal;
                 if (life >= currentLife)
@@ -76,16 +82,20 @@ public class PlayerMovement : MonoBehaviour {
 #endif
 
         if (Player.tag == "Player")
+        {
+            float posX = (transform.position.x + Input.GetAxis("Horizontal") * Time.deltaTime * speed);
+
+            transform.position = new Vector3(Mathf.Clamp(posX, -8f, 8f), 3.7f, 0);
+
+            if (!Funcoes.pcVersion)
             {
-                float posX = (transform.position.x + Input.GetAxis("Horizontal") * Time.deltaTime * speed);
-
-                transform.position = new Vector3(Mathf.Clamp(posX, -8f, 8f), 3.7f, 0);
-
                 float posXTouch = (transform.position.x + joystick.Horizontal * Time.deltaTime * speed);
 
                 transform.position = new Vector3(Mathf.Clamp(posXTouch, -8f, 8f), 3.7f, 0);
+            }
+
         }
- 
+
     }
 
     public void Light()

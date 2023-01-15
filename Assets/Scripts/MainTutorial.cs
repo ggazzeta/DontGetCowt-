@@ -14,6 +14,7 @@ public class MainTutorial : MonoBehaviour
     public Image myTimer;
     public GameObject ButtonOwner;
     public Image buttonAnimator;
+    public GameObject PainelTutorialWASD;
 
     public TextMeshProUGUI Touch;
     public TextMeshProUGUI Move;

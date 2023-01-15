@@ -160,7 +160,17 @@ public class GameManager : MonoBehaviour {
         FindObjectOfType<PlayerMovement>().enabled = true;
         EndGameMenu.SetActive(false);
         GameIsPaused = false;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        if (SceneManager.GetActiveScene().name.Contains("Tutorial"))
+        {
+            if (Funcoes.pcVersion)
+                SceneManager.LoadScene("Mapa1");
+            else
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+        else
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
     }
 
     public void LoadMenu()

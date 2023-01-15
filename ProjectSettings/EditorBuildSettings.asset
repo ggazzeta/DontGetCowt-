@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/FreeRoam.unity
     guid: e51cd2f76f2d6ec45b76c4875750977e
   - enabled: 1
+    path: Assets/Scenes/TutorialPC.unity
+    guid: d22ace28aca57314daa855139290715b
+  - enabled: 1
     path: Assets/Scenes/Tutorial.unity
     guid: aefc205b45bb5ae4f9c6c4d757c5c96d
   - enabled: 1

@@ -14,7 +14,6 @@ public class FloatingJoystick : Joystick
         background.gameObject.SetActive(false);
         GameObject.FindWithTag("Light").GetComponent<SpriteRenderer>().enabled = false;
         GameObject.FindWithTag("Light").GetComponent<CapsuleCollider2D>().enabled = false;
-        GameObject.Find("Player").GetComponent<PlayerMovement>().enabled = false;
     }
 
     public override void OnPointerDown(PointerEventData eventData)
@@ -28,7 +27,6 @@ public class FloatingJoystick : Joystick
     public override void OnPointerUp(PointerEventData eventData)
     {
         background.gameObject.SetActive(false);
-        GameObject.Find("Player").GetComponent<PlayerMovement>().enabled = true;
         base.OnPointerUp(eventData);
     }
 }
